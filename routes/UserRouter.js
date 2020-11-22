@@ -1,10 +1,11 @@
 const Router = require('express').Router()
-const UserController = require('../controllers/UserController')
-const { createToken, verifyToken, getToken } = require('../middleware/JwtHandler')
+const moment = require('moment')
+const userLogin = require('../middleware/userLogin')
 
-Router.get('/:user_id', UserController.GetProfile)
-Router.post('/register', UserController.CreateUser)
-Router.post('/login', UserController.SignInUser, createToken)
-Router.get('/refresh/session', getToken, verifyToken)
+Router.use(userLogin)
+
+// Profile Routes
+Router.get('/profile', (req,res) =>  res.render('user/profile', { moment }))
+
 
 module.exports = Router

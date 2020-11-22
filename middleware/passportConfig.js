@@ -33,8 +33,8 @@ passport.use(new LocalStrategy(
     // Try looking up the user by their email
     try {
         const user = await User.findOne({ email: email  })
-        console.log(user)
-        (user &&(await checkPassword(password, user.password))) ? done(null, user) : done(null, null)
+        if (user &&(await checkPassword(password, user.password))) done(null, user) 
+        else done(null, null)
     }
     catch(err) { throw err }
 }))

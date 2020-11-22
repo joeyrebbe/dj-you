@@ -1,0 +1,29 @@
+
+<nav>
+    <div class="nav-wrapper blue-grey darken-4">
+      <a href="#!" class="brand-logo center">DJ You<i class="material-icons">headphones</i></a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+
+        <li><a href="/">Home</a></li>
+        <% if (currentUser) { %>
+        <li><a href="/user/profile">Profile</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+        <% } else { %>
+          <li><a href="/auth/login">Login</a></li>
+          <li><a href="/auth/signup">Sign Up</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+      <li><a href="/">Home</a></li>
+      <% if (currentUser) { %>
+      <li><a href="/user/profile">Profile</a></li>
+      <li><a href="/auth/logout">Logout</a></li>
+      <% } else { %>
+      <li><a href="/auth/login">Login</a></li>
+      <li><a href="/auth/signup">Sign Up</a></li>
+      <% } %>
+  </ul>

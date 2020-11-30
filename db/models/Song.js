@@ -16,7 +16,10 @@ module.exports = new Schema(
             type: String,
             required: false,
             default: 'https://res.cloudinary.com/dmazi5xmh/image/upload/v1605921898/dj-you/record-hi_v9cc22.png'
-        } 
+        } ,
+        onPlaylist: {
+            type: ObjectID,
+        }
     },  
     {timestamps: true}
 )

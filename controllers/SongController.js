@@ -39,10 +39,10 @@ const SearchSong = async (req, res) => {
 const DeleteSong = async (req, res) => {
   
     try {
-    await Song.findOne({'song': req.params.id}, (err, song) => {
     const songSubdoc = song.id(req.params.id)
+    await Song.findOne({'song': req.params.id}, (err, song) => {
     songSubdoc.remove()
-    playlist.save(() => {
+    playlist.save( () => {
       res.redirect(`/home${playlist._id}`)
             })
         })

@@ -1,5 +1,6 @@
 const { render } = require('ejs')
 const { Playlist } = require('../db/schema')
+let newSongs = Playlist
 
 //ADAM / Jonah: need to require a handler function up here? to put in AddSong function
 
@@ -15,12 +16,7 @@ const CreatePlaylist = (req, res) => {
     });
   }
 
-  const EditPlaylist = (req, res) => {
-  Playlist.findById(req.params.id, (err, playlist) => {
-    if (!playlist.user.equals(req.user._id)) return res.redirect('/models/Playlist');
-    res.render('/models/Playlist/edit', {playlist});
-  });
-}
+// 
 
 
 const SearchPlaylist = (req, res) => {
@@ -46,26 +42,18 @@ const DeletePlaylist = (req, res) => {
   });
 }
 
-const AddSong = async (req, res) => {
-    // ??? need to put await function up here setting variable to external function???
-    const song = new Song(req.body)
-    try {
-    Song.findById(req.params.id, (err, song) => {
-        if (song.onPlaylist.id(req.user._id)) return res.redirect('/playlist')
-        song.onPlaylist.push(req.user._id)
-        song.save()
-    })
-    }
-    catch(err) {
-        console.log('Error Creating a Song', err)
-        res.redirect('/playlist')
-    }
-}
+
 
   module.exports = {
       CreatePlaylist, 
       SearchPlaylist, 
-      DeletePlaylist, 
-      EditPlaylist,
-      AddSong
+      DeletePlaylist
+      //   EditPlaylist,
   } 
+
+//   const EditPlaylist = (req, res) => {
+    //   Playlist.findById(req.params.id, (err, playlist) => {
+    //     if (!playlist.user.equals(req.user._id)) return res.redirect('/models/Playlist');
+    //     res.render('/models/Playlist/edit', {playlist});
+    //   });
+    // }

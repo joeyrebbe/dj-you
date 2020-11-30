@@ -8,18 +8,29 @@ module.exports = new Schema(
             type: String, 
             required: true
         },
-        api_id: {
-            type: String,
-            required: true
-        },
+
         img_url: {
             type: String,
             required: false,
             default: 'https://res.cloudinary.com/dmazi5xmh/image/upload/v1605921898/dj-you/record-hi_v9cc22.png'
-        } ,
-        onPlaylist: {
-            type: ObjectID,
+        }, 
+        genre: {
+            type: String,
+            required: false
+        },
+        bpm: {
+            type: Number,
+            required: false
+        },
+        rating: {
+            type: Number,
+            required: false
+        }, 
+        artist: {
+            type: String,
+            required: false
         }
+
     },  
     {timestamps: true}
 )

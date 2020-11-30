@@ -1,52 +1,61 @@
-const { song } = require('../db/models/Song')
+const { render } = require('ejs')
+const { Song } = require('../db/schema')
 
-const createSong = (req, res) => {
-    const song = new Song(req.body);
-    // Assign the logged in user's id
-    song.user = req.user._id;
-    song.save(function(err) {
-      if (err) return render;
-      // (<new or custom error template>) Probably want to go to newly added song's show view
-      res.redirect(`/playlist/${song._id}`);
-    });
+const CreateSong = async (req, res) => {
+    
+    try {
+        const song = new Song(req.body)
+        song.user = req.user._id
+        await song.save()
+        }
+    
+    catch(err) {
+        res.redirect(`/playlist/${song._id}`)
+    }
   }
 
 
-const searchSong = (req, res) => {
+const SearchSong = async (req, res) => {
   // Make the query object to use with Book.find based upon
   // if the user has submitted via a search form for a book name
-  let songQuery = req.query.title ? {title: new RegExp(req.query.title, 'i')} : {};
-  playlist.find(bookQuery, function(err, playlists) {
-    // Why not reuse the books/index template?
-	res.render('/books/index', {
-	  books,
+  try {
+    let songQuery = await req.query._id ? {title: new RegExp(req.query._id, 'i')} : {}
+    song.findOne(songQuery, (err, songs) => {
+	res.render('/user/song', {
+	  songs,
 	  user: req.user,
 	  nameSearch: req.query.name  // use to set content of search form
-	});
-  });
+	})
+  })
+    }
+
+    catch(err) {
+        console.log('No such song found')
+        res.redirect('/error')
+    }
 }
 
 
-const deleteSong = (req, res) => {
-  // Note the cool "dot" syntax to query on the property of a subdoc
-  Playlist.findOne({'comments._id': req.params.id}, function(err, book) {
-    // Find the comment subdoc using the id method on Mongoose arrays
-    // https://mongoosejs.com/docs/subdocs.html
-    const playlistSubdoc = playlist.title.id(req.params.id);
-    // Ensure that the comment was created by the logged in user
-    if (!playlist.title.equals(req.playlist.title)) return res.redirect(`/books/${book._id}`);
-    // Remove the comment using the remove method of the subdoc
-    commentSubdoc.remove();
-    // Save the updated book
-    playlist.save((err) => {
-      // Redirect back to the book's show view
-      res.redirect(`/user/home${playlist.title}`);
-    });
-  });
+const DeleteSong = async (req, res) => {
+  
+    try {
+    await Song.findOne({'song': req.params.id}, (err, song) => {
+    const songSubdoc = song.id(req.params.id)
+    songSubdoc.remove()
+    playlist.save(() => {
+      res.redirect(`/home${playlist._id}`)
+            })
+        })
+    }
+
+    catch(err) {
+        console.log('Failed to delete song')
+        res.redirect('/error')
+    }
 }
 
   module.exports = {
-      createSong, 
-      searchSong, 
-      deleteSong
+      CreateSong, 
+      SearchSong, 
+      DeleteSong
   } 

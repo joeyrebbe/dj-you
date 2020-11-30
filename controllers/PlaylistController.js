@@ -1,4 +1,4 @@
-const { render } = require('ejs');
+const { render } = require('ejs')
 const { Playlist } = require('../db/schema')
 
 

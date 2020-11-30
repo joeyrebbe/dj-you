@@ -40,3 +40,9 @@ passport.use(new LocalStrategy(
 }))
 // Make sure we can include this file into other files
 module.exports = passport
+
+
+
+// searchtrack.php?s={Artist_Name}&t={Single_Name}
+
+// ^^ theaudiodb key

@@ -16,11 +16,11 @@ module.exports = new Schema(
         },
         user_id: {
             type: Schema.Types.ObjectId,
-            ref: 'users'
+            ref: 'User'
         },
         songs: [{
             type: Schema.Types.ObjectId,
-            ref: 'songs'
+            ref: 'Song'
         }]
     },
     {timestamps: true}

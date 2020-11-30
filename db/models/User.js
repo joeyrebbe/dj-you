@@ -37,7 +37,7 @@ module.exports = new Schema(
     },
     playlists: [{
         type: Schema.Types.ObjectId,
-        ref: 'playlists',
+        ref: 'Playlist',
         required: false
     }]
   },

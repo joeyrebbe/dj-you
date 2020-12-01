@@ -1,8 +1,10 @@
 const { render } = require('ejs')
 const { Playlist } = require('../db/schema')
+const axios = require('axios')
 let newSongs = Playlist
+const artistSearchUrl = 'https://www.theaudiodb.com/api/v1/json/1/search.php?s='
+const artistAlbumsUrl = 'https://theaudiodb.com/api/v1/json/1/album.php?i='
 
-//ADAM / Jonah: need to require a handler function up here? to put in AddSong function
 
 
 const CreatePlaylist = (req, res) => {
@@ -32,45 +34,25 @@ const CreatePlaylist = (req, res) => {
         }
     }
 
-// 
-
-
-const SearchPlaylist = (req, res) => {
-  let playlistQuery = req.query.title ? {title: new RegExp(req.query.title, 'i')} : {};
-  playlist.find(playlistQuery, (err, playlists) => {
-	res.render('/playlists', {
-	  playlists,
-	  user: req.user,
-	  nameSearch: req.query.songs  // use to set content of search form
-	});
-  });
-}
-
-
-const DeletePlaylist = (req, res) => {
-  Playlist.findOne({'playlist._id': req.params.id}, (err, playlist) => {
-    const playlistSubdoc = playlist.title.id(req.params.id);
-    if (!playlist._id.equals(req.playlist._id)) return res.redirect(`/playlists/${playlist._id}`);
-    playlistSubdoc.remove();
-    playlist.save((err) => {
-      res.redirect(`/user/home${playlist.title}`);
-    });
-  });
+const GetArtist = async (req, res) => {
+    try {
+        const apiResponse = await axios.get(artistSearchUrl + req.body.s)
+        const artist = apiResponse.data.artists[0]
+        const albumResponse = await axios.get(artistAlbumsUrl + artist.idArtist)
+        const albums = albumResponse.data.album
+        console.log(albums[0])
+        res.render('music/artist', {artist, albums})
+    }
+    catch(err) {
+        console.log('you have no taste', err)
+    }
 }
 
 
 
   module.exports = {
       CreatePlaylist, 
-      SearchPlaylist, 
-      DeletePlaylist, 
-      GetPlaylist
-      //   EditPlaylist,
+      GetPlaylist, 
+      GetArtist
   } 
 
-//   const EditPlaylist = (req, res) => {
-    //   Playlist.findById(req.params.id, (err, playlist) => {
-    //     if (!playlist.user.equals(req.user._id)) return res.redirect('/models/Playlist');
-    //     res.render('/models/Playlist/edit', {playlist});
-    //   });
-    // }

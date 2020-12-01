@@ -1,0 +1,13 @@
+<h1><%= artist.strArtist%></h1>
+<h4><%= artist.strGenre%></h4>
+<p><%= artist.strBiographyEN%></p>
+
+<div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
+<% albums.forEach(album => { %>
+    <a href="/playlist/artist/songs">
+    <div style="background-image: url('<%= album.strAlbumCDart%>'); background-size: cover; min-height: 20vh"> 
+        <h6 style="text-align: center"><%= album.strAlbum%></h6>
+    </div>
+</a>
+<%})%>
+</div>

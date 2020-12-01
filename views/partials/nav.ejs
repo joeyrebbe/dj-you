@@ -7,6 +7,7 @@
 
         <li><a href="/">Home</a></li>
         <% if (currentUser) { %>
+          <li><a href="/playlist/search">Music Search</a></li>
         <li><a href="/user/profile">Profile</a></li>
         <li><a href="/auth/logout">Logout</a></li>
         <% } else { %>
@@ -20,6 +21,7 @@
   <ul class="sidenav" id="mobile-demo">
       <li><a href="/">Home</a></li>
       <% if (currentUser) { %>
+        <li><a href="/playlist/search">Music Search</a></li>
       <li><a href="/user/profile">Profile</a></li>
       <li><a href="/auth/logout">Logout</a></li>
       <% } else { %>

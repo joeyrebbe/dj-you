@@ -1,0 +1,34 @@
+<h1>Edit Profile</h1>
+<h2>User ID: <%= currentUser._id%></h2>
+
+<div>
+    <div>
+        <form method="POST" action="/auth/edit/<%= currentUser._id%>?_method=PUT">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input value="<%= currentUser.username%>" placeholder="Username" id="username" type="text" name="username">
+                    <label for="username">Username</label>
+                </div>
+                <div class="input-field col s6">
+                    <input value="<%= currentUser.profilepic%>" placeholder="Profile Picture" id="profilepic" type="text" name="profilepic">
+                    <label for="profilepic">Profile Picture</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input value="<%= currentUser.coverpic%>" placeholder="Cover Picture" id="coverpic" type="text" name="coverpic">
+                    <label for="coverpic">Cover Picture</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input value="<%= currentUser.artistname%>" placeholder="Artist Name" id="artistname" type="text" name="artistname">
+                    <label for="artistname">Artist Name</label>
+                </div>
+            </div>
+            <button class="btn waves-effect cyan darken-3" type="submit">Edit Profile
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+</div>

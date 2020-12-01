@@ -23,11 +23,34 @@ const CreateUser = async (req, res, next) => {
     }
     catch(err)  {
         console.log('Error creating a user', err)
-        res.redirect('/user/signup')
     }
 }
 
+const UpdateUser = async (req, res) => {
+  console.log(req.body)
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, 
+    {...req.body}, 
+    {new: true, useFindAndModify: false})
+    res.render('user/profile', { currentUser: user })
+  }
+  catch(err) {
+   console.log('err updating user', err)
+  }
+}
+
+const DeleteUser = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id)
+    res.redirect('/')
+  }
+  catch(err) {
+    console.log('err deleting user', err)
+  }
+}
 
 module.exports = {
   CreateUser,
+  UpdateUser,
+  DeleteUser
 }

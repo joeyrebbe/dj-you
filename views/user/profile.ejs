@@ -2,6 +2,7 @@
     <img style="margin: 8.5vw 39.25vw; border-radius: 50%; border: 3px solid black; height: 20.5vw; width: 20.5vw"
     class="profpic" src="<%= currentUser.profilepic %>" alt="profile pic">
     <h1 style="color: white; margin: 0; position: absolute; top: 35vw; left: 5vw;"><%= currentUser.username %></h1>
+    <h2 style="color: rgb(142, 11, 230); margin: 0; position: absolute; top: 9vh; left: 5vw;"><%= currentUser.artistname %></h2>
 </div>
 
 <form action="/playlist" method="POST">
@@ -9,9 +10,10 @@
     <button type="submit">Create Playlist</button>
   </form>
 
-  <form action="/song" method="POST">
-    <input placeholder="Seach Song" id="title" type="text" name="title">
-    <button type="submit">Search Songs</button>
+  <a href="/user/profile/edit"><button>Edit Profile</button></a>
+  
+  <form method="POST" action="/auth/delete/<%= currentUser._id %>?_method=DELETE">
+  <button type="submit">Delete Profile</button>
   </form>
 
  

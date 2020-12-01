@@ -12,6 +12,8 @@ Router.post('/login', passport.authenticate('local', {
     failureFlash: 'Invalid Credentials',
     failureRedirect: '/user/login'
 }))
+Router.put('/edit/:id', AuthController.UpdateUser)
+Router.delete('/delete/:id', AuthController.DeleteUser)
 
 
 Router.get('/logout', (req, res) => {

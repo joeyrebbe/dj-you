@@ -1,15 +1,41 @@
-
 <div style="background-image: url('<%= currentUser.coverpic %>'); background-size: cover; width: 100vw; height: 37.5vw">
     <img style="margin: 8.5vw 39.25vw; border-radius: 50%; border: 3px solid black; height: 20.5vw; width: 20.5vw"
-    class="profpic" src="<%= currentUser.profilepic %>" alt="profile pic">
+        class="profpic" src="<%= currentUser.profilepic %>" alt="profile pic">
     <h1 style="color: white; margin: 0; position: absolute; top: 35vw; left: 5vw;"><%= currentUser.username %></h1>
 </div>
 
-<h1>Playlist</h1>
 
-<form action="/playlist/new" method="POST">
-    <input placeholder="Add Song To Playlist" id="title" type="text" name="title">
-    <button type="submit">Add Songs</button>
-  </form>
 
-// POST	/posts/:id/comments	Create a comment for a post (1:M)	Needs Payload
+<h1><%= playlist.title%></h1>
+<h3>Add A New Song</h3>
+
+<form action="/song/<%= playlist._id %>" method="POST">
+    
+<div class="row">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="song name" name="song" type="text" class="validate">
+          <label for="song">Song Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input placeholder="genre" name="genre" type="text" class="validate">
+          <label for="genre">Genre</label>
+        </div>
+      </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="artist" type="text" name="artist" class="validate">
+          <label for="artist">Artist</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          </div>
+        </div>
+      </div>
+
+      <input type="submit" class="btn green darken-4" value="submit"></input>
+  </div>
+</form>
+

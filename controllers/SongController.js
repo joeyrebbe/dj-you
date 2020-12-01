@@ -1,17 +1,16 @@
 const { render } = require('ejs')
 const { Song } = require('../db/schema')
+const { Playlist } = require('../db/schema')
 
 const AddSong = async (req, res) => {
-    // ??? need to put await function up here setting variable to external function???
    try {
-       const newSong = await {
-           title: req.body.title,
-           genre: req.body.genre,
-           bpm: req.body.bpm,
-           rating: req.body.rating
-       }
-       await playlist.push(newSong)
-       res.render('playlist', {playlist: newSongs})
+       const newSong = await new Song(req.body)
+       await Playlist.findById(req.params.id, (err, playlist) => {
+           playlist.songs.push(newSong._id)
+           playlist.save(err => {
+            res.redirect('back')
+           })
+       })
    }
    catch(err) {
        console.log(err)
@@ -65,15 +64,15 @@ const DeleteSong = async (req, res) => {
   } 
 
 
-//   const CreateSong = async (req, res) => {
-    
-    //     try {
-    //         const song = new Song(req.body)
-    //         song.user = req.user._id
-    //         await song.save()
-    //         }
+  const CreateSong = async (req, res) => {
+    const song = new Song(req.body)
+
+        try {
+            song.user = req.user._id
+            await song.save()
+            }
         
-    //     catch(err) {
-    //         res.redirect(`/playlist/${song._id}`)
-    //     }
-    //   }
+        catch(err) {
+            res.redirect(`/playlist/${song._id}`)
+        }
+      }

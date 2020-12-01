@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 app.use('/user', require('./routes/UserRouter'))
 app.use('/auth', require('./routes/AuthRouter'))
 app.use('/playlist', require('./routes/PlaylistRouter'))
-app.use('/addsong', require('./routes/SongRouter'))
+app.use('/song', require('./routes/SongRouter'))
 // Create a home (index) route that renders the home page
 app.get('/', (req,res) => res.render('home'))
 // Create catch-all route. Put it at the BOTTOM of routes

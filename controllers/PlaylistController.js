@@ -16,6 +16,22 @@ const CreatePlaylist = (req, res) => {
     });
   }
 
+  const GetPlaylist = async (req, res) => {
+    console.log('s')    
+         try {
+            Playlist.findById(req.params.id)
+            .populate('songs')
+            .then( (dbPlaylist) => {
+                console.log(dbPlaylist)
+                res.render('user/playlist', {playlist: dbPlaylist})
+            })
+        }
+        catch(err) {
+            console.log(err)
+            res.render('/error')
+        }
+    }
+
 // 
 
 
@@ -47,7 +63,8 @@ const DeletePlaylist = (req, res) => {
   module.exports = {
       CreatePlaylist, 
       SearchPlaylist, 
-      DeletePlaylist
+      DeletePlaylist, 
+      GetPlaylist
       //   EditPlaylist,
   } 
 

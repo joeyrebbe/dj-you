@@ -2,6 +2,10 @@
 
 ## Screenshots 
 
+Home Page:
+
+![Alt text](Recents/Home%20Page?raw=true "Home Page")
+
 
 ## Technologies Used 
 
@@ -23,17 +27,14 @@ Check out this project's [trello](https://trello.com/b/DQ4deE4N/dj-you-sei-proje
 
 
 
-* deployed heroku link here 
-
 ## Next Steps
 
 Here are some icebox items that are next in line for DJ-You.
 
-1. Link two external APIs: [theaudiodb]() and [getsongbpm](), and use them to search songs that are pre-populated with information. 
+1. Link one more external API: [getsongbpm](https://getsongbpm.com/), and use it and [theaudiodb](https://www.theaudiodb.com/api_guide.php) to search songs that are pre-populated with information. 
 
 1. Add a "Search User" feature, so that your friends can see what good taste in music you have. 
 
-1. To discover music via a categorical search, i.e. scraping an API by genre or bpm. 
 
 
 

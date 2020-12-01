@@ -38,9 +38,9 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }))
-// Set up connect-flash for the flash alert messages (depends on session, MUST come after session is declared)
+// Set up connect-flash for the flash alert messages 
 app.use(flash())
-// Set up passport (depends on session; must come after it)
+// Set up passport 
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -63,7 +63,7 @@ app.use('/playlist', require('./routes/PlaylistRouter'))
 app.use('/song', require('./routes/SongRouter'))
 // Create a home (index) route that renders the home page
 app.get('/', (req,res) => res.render('home'))
-// Create catch-all route. Put it at the BOTTOM of routes
+// Create catch-all route
 app.get('*', (req, res) => res.render('error'))
 
 

@@ -7,32 +7,15 @@ const artistAlbumsUrl = 'https://theaudiodb.com/api/v1/json/1/album.php?i='
 
 
 
-const CreatePlaylist = (req, res) => {
-    const playlist = new Playlist(req.body);
-    // Assign the logged in user's id
-    playlist.user = res.locals.currentUser._id;
-    playlist.save(function(err) {
-      if (err) return render;
-      // (<new or custom error template>) Probably want to go to newly added playlist's show view
-      res.redirect(`/playlist/${playlist._id}`);
-    });
-  }
-
-  const GetPlaylist = async (req, res) => {
-    console.log('s')    
-         try {
-            Playlist.findById(req.params.id)
-            .populate('songs')
-            .then( (dbPlaylist) => {
-                console.log(dbPlaylist)
-                res.render('user/playlist', {playlist: dbPlaylist})
-            })
-        }
-        catch(err) {
-            console.log(err)
-            res.render('/error')
-        }
+const CreatePlaylist = async (req, res) => {
+    try {
+      const newPlaylist = new Playlist({ ...req.body, user_id: req.user.id })
+      newPlaylist.save()
+      res.render('user/playlist', {playlist: newPlaylist} )
+    } catch (error) {
+      throw error
     }
+  }
 
 const GetArtist = async (req, res) => {
     try {
@@ -52,7 +35,19 @@ const GetArtist = async (req, res) => {
 
   module.exports = {
       CreatePlaylist, 
-      GetPlaylist, 
       GetArtist
+      //   GetPlaylist, 
   } 
 
+  //   const GetPlaylist = async (req, res) => {
+//     console.log('s')    
+//          try {
+//             Playlist.findById(req.params.id)
+//             .populate('songs')
+//             res.render('/')
+//             }
+//         catch(err) {
+//             console.log(err)
+//             res.render('/error')
+//         }
+//     }

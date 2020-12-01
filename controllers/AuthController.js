@@ -7,7 +7,6 @@ const CreateUser = async (req, res, next) => {
     try {
       const body = req.body
       const password = await generatePassword(body.password)
-      // Passwords matched, so now we'll create a new user
       const user = new User({
               username: body.username,
               email: body.email,
